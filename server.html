@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Caller</title>
+	<style>
+	/*@media only screen and (min-device-width: 480px) {*/
+		body {
+			font-family: sans-serif;
+		}
+		#name {
+		    /*background-color: #4CAF50; /* Green */*/
+		    border: none;
+		    /*color: white;*/
+		    vertical-align: middle;
+		    text-align: center;
+		    width: 100%;
+		    line-height: 300px;
+		    text-decoration: none;
+		    display: block;
+		    font-size: 2em;
+		}
+		#mobile {
+		    background-color: #4CAF50; /* Green */
+		    border: none;
+		    color: white;
+		    vertical-align: middle;
+		    text-align: center;
+		    width: 100%;
+		    line-height: 300px;
+		    text-decoration: none;
+		    display: block;
+		    font-size: 2em;
+		    position: absolute;
+		    right: 0;
+		    bottom: 0;
+		    left: 0;
+		}
+	/*}*/
+	</style>
+</head>
+<body>
+	<div id="name">Thanh</div>
+	<a id="mobile" href="tel:+4915152893773">+4915152893773</a>
+	<script src="http://localhost:4000/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io()
+
+		socket.on('lead copied', function(call){
+			alert(call);
+			var data = JSON.parse(call);
+			console.log(data);
+			_name = document.getElementById("name"),
+			_mobile = document.getElementById("mobile");
+
+			_mobile.href = "tel:" + data.mobile;
+			_mobile.innerHTML = data.mobile;
+			_name.innerHTML = data.name
+		});
+	</script>
+</body>
+</html>
+
